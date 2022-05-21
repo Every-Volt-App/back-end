@@ -1,4 +1,3 @@
-const { required } = require("nodemon/lib/config");
 const mongoose = require("../db/connection");
 
 const UserSchema = new mongoose.Schema(
@@ -22,4 +21,4 @@ const UserSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", UserSchema);
 
-module.exports = Pattern;
+module.exports = User;
