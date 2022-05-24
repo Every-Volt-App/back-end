@@ -1,0 +1,66 @@
+[
+    {
+        "title": "1098 Alta Ave",
+        "addressLine1": "1098 Alta Ave",
+        "town": "Mountain View",
+        "state": "California",
+        "postcode": "94043",
+        "lat": 37.41964,
+        "lon": -122.07858,
+        "telephone": "650.253.0000",
+        "numberOfChargers": 105,
+        "availableChargers": null,
+        "statusType": {
+            "isOperational": false,
+            "title": "Private - Restricted Access"
+        }
+    },
+    {
+        "title": "ADISYS CORP",
+        "addressLine1": "2003 Leghorn St",
+        "town": "Mountain View",
+        "state": "California",
+        "postcode": "94043",
+        "lat": 37.4186115,
+        "lon": -122.0916922,
+        "telephone": "888-758-4389",
+        "numberOfChargers": 10,
+        "availableChargers": null,
+        "statusType": {
+            "isOperational": true,
+            "title": "Public"
+        }
+    },
+    {
+        "title": "La Paz",
+        "addressLine1": null,
+        "town": "Mountain View",
+        "state": "California",
+        "postcode": "94043",
+        "lat": 37.4182397059542,
+        "lon": -122.0704613516468,
+        "telephone": null,
+        "numberOfChargers": 1,
+        "availableChargers": null,
+        "statusType": {
+            "isOperational": true,
+            "title": "Public - Membership Required"
+        }
+    },
+    {
+        "title": "693 ARASTRADERO",
+        "addressLine1": "693 Arastradero Rd",
+        "town": "Palo Alto",
+        "state": "California",
+        "postcode": "94006",
+        "lat": 37.40101,
+        "lon": -122.129312,
+        "telephone": "888-758-4389",
+        "numberOfChargers": null,
+        "availableChargers": null,
+        "statusType": {
+            "isOperational": true,
+            "title": "Public"
+        }
+    }
+]
