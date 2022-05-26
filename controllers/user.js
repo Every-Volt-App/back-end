@@ -60,4 +60,13 @@ userRouter.post(
   }
 );
 
+userRouter.get(
+  "/logout",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.clearCookie("access_token");
+    res.json({ user: { username: "", role: "" }, success: true });
+  }
+);
+
 module.exports = userRouter;
