@@ -15,7 +15,7 @@ passport.use(
   new JwtStrategy(
     {
       jwtFromRequest: cookieExtractor,
-      secretOrKey: "NoobCoder",
+      secretOrKey: "EveryVolt",
     },
     (payload, done) => {
       User.findById({ _id: payload.sub }, (err, user) => {
