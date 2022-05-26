@@ -1,4 +1,4 @@
-const mongoose = require("../db/connection");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema(
@@ -9,11 +9,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       min: 3,
       max: 20,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
     },
     password: {
       type: String,
@@ -48,6 +43,4 @@ UserSchema.methods.comparePassword = function (password, cb) {
   });
 };
 
-const User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);
