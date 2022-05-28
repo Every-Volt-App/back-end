@@ -1,22 +1,22 @@
 [
   {
     "username": "griselle",
-    "email": "grisellejrivera@gmail.com",
-    "password": "projectmanager"
+    "password": "projectmanager",
+    "role": "admin"
   },
   {
     "username": "hong",
-    "email": "hong.b918@gmail.com",
-    "password": "gitmaster"
+    "password": "gitmaster",
+    "role": "admin"
   },
   {
     "username": "jazmine",
-    "email": "jazminedmiller@gmail.com",
-    "password": "uxprodigy"
+    "password": "uxprodigy",
+    "role": "admin"
   },
   {
     "username": "larissa",
-    "email": "lv23@nyu.edu",
-    "password": "deploydaemon"
+    "password": "deploydaemon",
+    "role": "admin"
   }
 ]
