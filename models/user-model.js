@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       required: true,
     },
-    cars: [{ type: mongoose.Schema.Types.ObjectId, ref: "Car" }],
+    profile: [{ type: mongoose.Schema.Types.ObjectId, ref: "Profile" }],
   },
   { timestamps: true }
 );
