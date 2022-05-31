@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(locationController);
 
 app.use(cookieParser());
-app.use("/user", userController);
+app.use(userController);
 
 // create a test router
 app.get("/", (req, res) => {

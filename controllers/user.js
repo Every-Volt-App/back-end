@@ -4,7 +4,7 @@ const passport = require("passport");
 const passportConfig = require("../passport");
 const JWT = require("jsonwebtoken");
 const User = require("../models/user-model");
-const Car = require("../models/car-model");
+// const Car = require("../models/car-model");
 
 const signToken = (userID) => {
   return JWT.sign(
@@ -17,7 +17,7 @@ const signToken = (userID) => {
   );
 };
 
-userRouter.post("/register", (req, res) => {
+userRouter.post("/user/register", (req, res) => {
   const { username, password, role } = req.body;
   User.findOne({ username }, (err, user) => {
     if (err)
@@ -48,7 +48,7 @@ userRouter.post("/register", (req, res) => {
 });
 
 userRouter.post(
-  "/login",
+  "/user/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
     if (req.isAuthenticated()) {
@@ -61,7 +61,7 @@ userRouter.post(
 );
 
 userRouter.get(
-  "/logout",
+  "/user/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.clearCookie("access_token");
@@ -70,7 +70,7 @@ userRouter.get(
 );
 
 userRouter.get(
-  "/authenticated",
+  "/user/authenticated",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { username, role } = req.user;
