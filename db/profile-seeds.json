@@ -1,0 +1,17 @@
+[
+  {
+    "profileImage": "https://lh3.googleusercontent.com/pw/AM-JKLX2gs-dyN6x7Gi6K5DFv0aWazRwObp3MMuHIaObUrEDYJAN1BqJRofyFj1CaxgZQ3rJthWeQx5dI3dkzLc3_SjFrls6dg5kkfYNGhXPTzKgr3MvM0EDvhn7t-O7UhqpOfl1E5FfIiBVDDt0yyjPSeMARw=w768-h1024-no?authuser=0",
+    "primaryCar": {
+      "make": "Toyota",
+      "model": "Prius",
+      "connectionType": "Type 1 (J1772)"
+    },
+    "primaryAddress": {
+      "addressLine1": "117 Wilson Ave",
+      "addressLine2": "Apt 2R",
+      "city": "Brooklyn",
+      "state": "NY",
+      "zipcode": "11237"
+    }
+  }
+]
