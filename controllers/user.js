@@ -17,7 +17,7 @@ const signToken = (userID) => {
   );
 };
 
-userRouter.post("/user/register", (req, res) => {
+userRouter.post("/user/signup", (req, res) => {
   const { username, password, role } = req.body;
   User.findOne({ username }, (err, user) => {
     if (err)
@@ -51,6 +51,8 @@ userRouter.post(
   "/user/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
+    console.log(req.body);
+    console.log(req.user);
     if (req.isAuthenticated()) {
       const { _id, username, role } = req.user;
       const token = signToken(_id);
