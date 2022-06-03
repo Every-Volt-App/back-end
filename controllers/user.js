@@ -127,8 +127,6 @@ router.put(
   "/user/profile/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.body);
-    console.log(req.user);
     Profile.findByIdAndUpdate(
       req.params.id,
       {
