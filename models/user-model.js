@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       required: true,
     },
-    profile: [{ type: mongoose.Schema.Types.ObjectId, ref: "Profile" }],
+    profile: { type: mongoose.Schema.Types.ObjectId, ref: "Profile" },
   },
   { timestamps: true }
 );

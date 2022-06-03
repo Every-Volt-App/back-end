@@ -1,5 +1,5 @@
 const express = require("express");
-const userRouter = express.Router();
+const router = express.Router();
 const passport = require("passport");
 const passportConfig = require("../passport");
 const JWT = require("jsonwebtoken");
@@ -17,7 +17,7 @@ const signToken = (userID) => {
   );
 };
 
-userRouter.post("/user/signup", (req, res) => {
+router.post("/user/signup", (req, res) => {
   const { username, password, role } = req.body;
   User.findOne({ username }, (err, user) => {
     if (err)
@@ -47,12 +47,10 @@ userRouter.post("/user/signup", (req, res) => {
   });
 });
 
-userRouter.post(
+router.post(
   "/user/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
-    console.log(req.body);
-    console.log(req.user);
     if (req.isAuthenticated()) {
       const { _id, username, role } = req.user;
       const token = signToken(_id);
@@ -62,7 +60,7 @@ userRouter.post(
   }
 );
 
-userRouter.get(
+router.get(
   "/user/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -71,42 +69,13 @@ userRouter.get(
   }
 );
 
-userRouter.post(
-  "/user/profile",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const profile = new Profile(req.body);
-    profile.save((err) => {
-      if (err)
-        res
-          .status(500)
-          .json({ message: { msgBody: "Error has occured", msgError: true } });
-      else {
-        req.user.profiles.push(profile);
-        req.user.save((err) => {
-          if (err)
-            res.status(500).json({
-              message: { msgBody: "Error has occured", msgError: true },
-            });
-          else
-            res.status(200).json({
-              message: {
-                msgBody: "Successfully created profile",
-                msgError: false,
-              },
-            });
-        });
-      }
-    });
-  }
-);
-
-userRouter.get(
-  "/user/profiles",
+// GET user profile
+router.get(
+  "/user/profile/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findById({ _id: req.user._id })
-      .populate("profiles")
+      .populate("profile")
       .exec((err, document) => {
         if (err)
           res.status(500).json({
@@ -115,13 +84,111 @@ userRouter.get(
         else {
           res
             .status(200)
-            .json({ profiles: document.profiles, authenticated: true });
+            .json({ profile: document.profile, authenticated: true });
         }
       });
   }
 );
 
-userRouter.get(
+//CREATE user profile
+router.post(
+  "/user/profile",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const profile = new Profile(req.body);
+    req.user.profile = profile;
+    profile.save((err) => {
+      if (err)
+        res
+          .status(500)
+          .json({ message: { msgBody: "Error has occured", msgError: true } });
+      else {
+        req.user.save((err) => {
+          if (err) {
+            res.status(500).json({
+              message: { msgBody: "Error has occured", msgError: true },
+            });
+          } else {
+            res.status(200).json({
+              message: {
+                msgBody: "Successfully created profile",
+                msgError: false,
+              },
+            });
+          }
+        });
+      }
+    });
+  }
+);
+
+//UPDATE user profile
+// router.put(
+//   "/user/profile/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     Profile.findByIdAndUpdate(
+//       { _id: req.user._id },
+//       {
+//         profileImage: req.body.profileImage,
+//         primaryCar: {
+//           make: req.body.make,
+//           model: req.body.model,
+//           connectionType: req.body.connectionType,
+//         },
+//         primaryAddress: {
+//           addressLine1: req.body.addressLine1,
+//           addressLine2: req.body.addressLine2,
+//           city: req.body.city,
+//           state: req.body.state,
+//           zipcode: req.body.zipcode,
+//         },
+//       },
+//       { new: true }
+//     )
+//       .populate("profile")
+//       .exec((err) => {
+//         if (err)
+//           res.status(500).json({
+//             message: { msgBody: "Error has occured", msgError: true },
+//           });
+//         else {
+//           res.status(200).json({
+//             message: {
+//               msgBody: "Successfully updated profile",
+//               msgError: false,
+//             },
+//           });
+//         }
+//       });
+//   }
+// );
+
+//DELETE user profile
+// router.delete(
+//   "/user/profile/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     User.findByIdAndRemove({ _id: req.user._id })
+//       .populate("profile")
+//       .exec((err) => {
+//         if (err)
+//           res.status(500).json({
+//             message: { msgBody: "Error has occured", msgError: true },
+//           });
+//         else {
+//           res.status(200).json({
+//             message: {
+//               msgBody: "Successfully deleted profile",
+//               msgError: false,
+//             },
+//           });
+//         }
+//       });
+//   }
+// );
+
+router.get(
   "user/admin",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -131,12 +198,12 @@ userRouter.get(
         .json({ message: { msgBody: "You are an admin", msgError: false } });
     } else
       res.status(403).json({
-        message: { msgBody: "You're not an admin,go away", msgError: true },
+        message: { msgBody: "You're not an admin, go away", msgError: true },
       });
   }
 );
 
-userRouter.get(
+router.get(
   "/user/authenticated",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -145,4 +212,4 @@ userRouter.get(
   }
 );
 
-module.exports = userRouter;
+module.exports = router;

@@ -14,13 +14,13 @@ const ProfileSchema = new mongoose.Schema(
       city: String,
       state: {
         type: String,
-        min: 2,
-        max: 2,
+        minLength: 2,
+        maxLength: 2,
       },
       zipcode: {
         type: Number,
-        min: 5,
-        max: 5,
+        minLength: 5,
+        maxLength: 5,
       },
     },
   },
