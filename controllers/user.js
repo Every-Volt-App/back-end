@@ -123,70 +123,68 @@ router.post(
 );
 
 //UPDATE user profile
-// router.put(
-//   "/user/profile/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Profile.findByIdAndUpdate(
-//       { _id: req.user._id },
-//       {
-//         profileImage: req.body.profileImage,
-//         primaryCar: {
-//           make: req.body.make,
-//           model: req.body.model,
-//           connectionType: req.body.connectionType,
-//         },
-//         primaryAddress: {
-//           addressLine1: req.body.addressLine1,
-//           addressLine2: req.body.addressLine2,
-//           city: req.body.city,
-//           state: req.body.state,
-//           zipcode: req.body.zipcode,
-//         },
-//       },
-//       { new: true }
-//     )
-//       .populate("profile")
-//       .exec((err) => {
-//         if (err)
-//           res.status(500).json({
-//             message: { msgBody: "Error has occured", msgError: true },
-//           });
-//         else {
-//           res.status(200).json({
-//             message: {
-//               msgBody: "Successfully updated profile",
-//               msgError: false,
-//             },
-//           });
-//         }
-//       });
-//   }
-// );
+router.put(
+  "/user/profile/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log(req.body);
+    console.log(req.user);
+    Profile.findByIdAndUpdate(
+      req.params.id,
+      {
+        profileImage: req.body.profileImage,
+        primaryCar: {
+          make: req.body.primaryCar.make,
+          model: req.body.primaryCar.model,
+          connectionType: req.body.primaryCar.connectionType,
+        },
+        primaryAddress: {
+          addressLine1: req.body.primaryAddress.addressLine1,
+          addressLine2: req.body.primaryAddress.addressLine2,
+          city: req.body.primaryAddress.city,
+          state: req.body.primaryAddress.state,
+          zipcode: req.body.primaryAddress.zipcode,
+        },
+      },
+      { new: true }
+    ).exec((err) => {
+      if (err)
+        res.status(500).json({
+          message: { msgBody: "Error has occured", msgError: true },
+        });
+      else {
+        res.status(200).json({
+          message: {
+            msgBody: "Successfully updated profile",
+            msgError: false,
+          },
+        });
+      }
+    });
+  }
+);
 
 //DELETE user profile
-// router.delete(
-//   "/user/profile/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     User.findByIdAndRemove({ _id: req.user._id })
-//       .populate("profile")
-//       .exec((err) => {
-//         if (err)
-//           res.status(500).json({
-//             message: { msgBody: "Error has occured", msgError: true },
-//           });
-//         else {
-//           res.status(200).json({
-//             message: {
-//               msgBody: "Successfully deleted profile",
-//               msgError: false,
-//             },
-//           });
-//         }
-//       });
-//   }
-// );
+router.delete(
+  "/user/profile/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findByIdAndRemove(req.params.id).exec((err) => {
+      if (err)
+        res.status(500).json({
+          message: { msgBody: "Error has occured", msgError: true },
+        });
+      else {
+        res.status(200).json({
+          message: {
+            msgBody: "Successfully deleted profile",
+            msgError: false,
+          },
+        });
+      }
+    });
+  }
+);
 
 router.get(
   "user/admin",
