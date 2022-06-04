@@ -13,7 +13,7 @@ const signToken = (userID) => {
       sub: userID,
     },
     "EveryVolt",
-    { expiresIn: "1h" }
+    { expiresIn: "6h" }
   );
 };
 
